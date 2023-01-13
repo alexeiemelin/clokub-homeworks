@@ -23,6 +23,79 @@ Resource terraform для ЯО
 - [VPC subnet](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/vpc_subnet)
 - [Route table](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/vpc_route_table)
 - [Compute Instance](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/compute_instance)
+
+Ответ:
+
+Config лежит в папке /terraform
+
+Подключился к первой вм - проверил inet
+Подключился с vm1 на vm2 - проверил выход в inet
+
+```bash
+user@user:~/PycharmProjects/clokub-homeworks_true/15.1/terraform$ yc compute instance list
++----------------------+------+---------------+---------+----------------+----------------+
+|          ID          | NAME |    ZONE ID    | STATUS  |  EXTERNAL IP   |  INTERNAL IP   |
++----------------------+------+---------------+---------+----------------+----------------+
+| fhm1u6jhnsg66vkic2gk | vm2  | ru-central1-a | RUNNING | 51.250.73.81   | 192.168.20.10  |
+| fhm58p7e6vs1ksrhglot | nat  | ru-central1-a | RUNNING | 158.160.44.83  | 192.168.10.254 |
+| fhmbomur49fnqp5usroj | vm1  | ru-central1-a | RUNNING | 84.252.128.249 | 192.168.10.25  |
++----------------------+------+---------------+---------+----------------+----------------+
+
+user@user:~/pycharm-community-2021.3/bin$ ssh ubuntu@84.252.128.249
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-39-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+Last login: Fri Jan 13 12:35:44 2023 from 185.27.50.154
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@fhmbomur49fnqp5usroj:~$ ping ya.ru
+PING ya.ru (87.250.250.242) 56(84) bytes of data.
+64 bytes from ya.ru (87.250.250.242): icmp_seq=1 ttl=58 time=3.41 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=2 ttl=58 time=0.466 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=3 ttl=58 time=0.417 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=4 ttl=58 time=0.443 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=5 ttl=58 time=0.390 ms
+^C
+--- ya.ru ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4067ms
+rtt min/avg/max/mdev = 0.390/1.025/3.411/1.193 ms
+
+ubuntu@fhmbomur49fnqp5usroj:~$ ssh ubuntu@51.250.73.81
+load pubkey "/home/ubuntu/.ssh/id_rsa": invalid format
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-39-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+Last login: Fri Jan 13 12:48:54 2023 from 185.27.50.154
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@fhm1u6jhnsg66vkic2gk:~$ ping ya.ru
+PING ya.ru (87.250.250.242) 56(84) bytes of data.
+64 bytes from ya.ru (87.250.250.242): icmp_seq=1 ttl=59 time=0.805 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=2 ttl=59 time=0.416 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=3 ttl=59 time=0.387 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=4 ttl=59 time=0.414 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=5 ttl=59 time=0.483 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=6 ttl=59 time=0.480 ms
+64 bytes from ya.ru (87.250.250.242): icmp_seq=7 ttl=59 time=0.441 ms
+^C
+--- ya.ru ping statistics ---
+7 packets transmitted, 7 received, 0% packet loss, time 6123ms
+rtt min/avg/max/mdev = 0.387/0.489/0.805/0.132 ms
+
+```
+
 ---
 ## Задание 2*. AWS (необязательное к выполнению)
 
