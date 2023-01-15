@@ -32,24 +32,33 @@ Config лежит в папке /terraform
 
 ```bash
 user@user:~/PycharmProjects/clokub-homeworks_true/15.1/terraform$ yc compute instance list
-+----------------------+------+---------------+---------+----------------+----------------+
-|          ID          | NAME |    ZONE ID    | STATUS  |  EXTERNAL IP   |  INTERNAL IP   |
-+----------------------+------+---------------+---------+----------------+----------------+
-| fhm1u6jhnsg66vkic2gk | vm2  | ru-central1-a | RUNNING | 51.250.73.81   | 192.168.20.10  |
-| fhm58p7e6vs1ksrhglot | nat  | ru-central1-a | RUNNING | 158.160.44.83  | 192.168.10.254 |
-| fhmbomur49fnqp5usroj | vm1  | ru-central1-a | RUNNING | 84.252.128.249 | 192.168.10.25  |
-+----------------------+------+---------------+---------+----------------+----------------+
++----------------------+------+---------------+---------+---------------+----------------+
+|          ID          | NAME |    ZONE ID    | STATUS  |  EXTERNAL IP  |  INTERNAL IP   |
++----------------------+------+---------------+---------+---------------+----------------+
+| fhm7193m8sk6957lh4m4 | nat  | ru-central1-a | RUNNING | 62.84.112.215 | 192.168.10.254 |
+| fhm8d455o12a5rhor6oe | vm1  | ru-central1-a | RUNNING | 51.250.78.32  | 192.168.10.10  |
+| fhmfuvvipf64hisl18tr | vm2  | ru-central1-a | RUNNING |               | 192.168.20.20  |
++----------------------+------+---------------+---------+---------------+----------------+
 
-user@user:~/pycharm-community-2021.3/bin$ ssh ubuntu@84.252.128.249
+
+user@user:~/pycharm-community-2021.3/bin$ ssh ubuntu@51.250.78.32
+The authenticity of host '51.250.78.32 (51.250.78.32)' can't be established.
+ECDSA key fingerprint is SHA256:9jfpVV5zCL4mlsT0nKeiGcorQ+PEw1xusElONvQFE6U.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '51.250.78.32' (ECDSA) to the list of known hosts.
 Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-39-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/advantage
-New release '22.04.1 LTS' available.
-Run 'do-release-upgrade' to upgrade to it.
 
-Last login: Fri Jan 13 12:35:44 2023 from 185.27.50.154
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
 ```
@@ -73,17 +82,20 @@ rtt min/avg/max/mdev = 0.390/1.025/3.411/1.193 ms
 Подключился с vm1 на vm2
 
 ```bash
-ubuntu@fhmbomur49fnqp5usroj:~$ ssh ubuntu@51.250.73.81
-load pubkey "/home/ubuntu/.ssh/id_rsa": invalid format
+ubuntu@fhm8d455o12a5rhor6oe:~$ ssh ubuntu@192.168.20.20
 Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-39-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/advantage
-New release '22.04.1 LTS' available.
-Run 'do-release-upgrade' to upgrade to it.
 
-Last login: Fri Jan 13 12:48:54 2023 from 185.27.50.154
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
 ```

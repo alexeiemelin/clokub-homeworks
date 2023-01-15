@@ -32,6 +32,7 @@ resource "yandex_compute_instance" "vm1" {
   network_interface {
     subnet_id = yandex_vpc_subnet.public.id
     nat       = true
+    ip_address = "192.168.10.10"
   }
 
   metadata = {
@@ -80,7 +81,7 @@ resource "yandex_compute_instance" "vm2" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.private.id
-    nat       = true
+    ip_address = "192.168.20.20"
   }
 
   metadata = {
@@ -89,7 +90,7 @@ resource "yandex_compute_instance" "vm2" {
 }
 
 resource "yandex_vpc_network" "network-1" {
-  name = "network1"
+  name = "network-1"
 }
 
 resource "yandex_vpc_subnet" "public" {
@@ -99,20 +100,21 @@ resource "yandex_vpc_subnet" "public" {
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
-resource "yandex_vpc_network" "network-2" {
-  name = "network2"
-}
+#resource "yandex_vpc_network" "network-2" {
+#  name = "network2"
+#}
 
 resource "yandex_vpc_subnet" "private" {
   name           = "private"
   zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.network-2.id
+  network_id     = yandex_vpc_network.network-1.id
   v4_cidr_blocks = ["192.168.20.0/24"]
+  route_table_id = yandex_vpc_route_table.route-table.id
 }
 resource "yandex_vpc_route_table" "route-table" {
-  network_id = "${yandex_vpc_network.network-2.id}"
+  network_id = yandex_vpc_network.network-1.id
     static_route {
-    destination_prefix = "192.168.10.0/24"
-    next_hop_address = "192.168.10.254"
+      destination_prefix = "0.0.0.0/0"
+      next_hop_address = "192.168.10.254"
   }
 }
